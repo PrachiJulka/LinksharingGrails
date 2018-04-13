@@ -1,0 +1,1 @@
+Your new <g:link controller="login" action="index" base="http://localhost:8081">Link sharing</g:link> password is ${newPassword}
