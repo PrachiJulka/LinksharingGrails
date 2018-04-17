@@ -1,19 +1,11 @@
 
-        <!-- Modal content-->
-%{--        <div class="modal-content topic">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
-                <h4 class="modal-title">Create Topic(Pop up)</h4>
-            </div>
-
-            <div class="modal-body">--}%
         <div class="modal-dialog">
 
                <!-- Modal content-->
                <div class="modal-content">
                    <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal">x</button>
-                       <h4 class="modal-title"> Topic(Pop up)</h4>
+                       <h4 class="modal-title"> Topic</h4>
                    </div>
 
                    <div class="modal-body">

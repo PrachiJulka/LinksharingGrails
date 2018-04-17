@@ -57,56 +57,33 @@ class TopicController {
 
     }
     def invite(InvitationCO invitationCO) {
-        Topic topic = Topic.get(invitationCO.topicId)
-        if (topic && (!invitationCO.email.matches("\\s"))) {
-            TopicVO topicVO = new TopicVO(id: topic.id, name: topic.name, visibility: topic.visibility,
-                    createdBy: topic.createdBy)
-            EmailDTO emailDTO = new EmailDTO(to: [invitationCO.email], subject: "Invitations for topic from linksharing",
-                    view: '/email/_invite', model: [currentUser: session.user, topic: topicVO])
-
-
-                emailService.sendMail(emailDTO)
-
-
-            flash.message = "Successfully invited"
-        } else {
-            flash.error = "Can't sent invitation"
-        }
-        redirect(controller: "user", action: "index")
-
+        String result=topicService.invite(invitationCO,session.user)
+        flash.message=result
+        redirect(controller: "user",action: "index")
     }
     def handleObjectNotFoundException() {
 
         render ("no object found")
     }
     def join(Long topicId) {
-        User user = session.user
-        if (user) {
-            Topic topic = Topic.get(topicId)
-            if (topic) {
-                Subscription subscription = new Subscription(topic: topic, user: session.user, seriousness: Seriousness.SERIOUS)
-                if (subscription?.save(flush: true)) {
-                    flash.message = "Subscription save successfully"
-                } else {
-                    flash.error = "Subscription not save successfully"
-                }
-            } else {
-                flash.error = "Topic not exist"
-            }
+
+        Map result=topicService.join(session.user,topicId)
+        if(result.get("success")){
+            flash.message="Subscription saved successfully"
         }
+        else{
+            flash.error=result.get("message")
+        }
+
         redirect(controller: "login", action: 'index')
     }
+
     def update(){
         Long topicId=Long.parseLong(params.topicId)
-    Long result =Topic.executeUpdate("update Topic set name=:name where id=:topicId",[name:params.topicName,topicId:topicId])
-    if(result)
-        flash.message="Topic name updated successfully"
-        else
-        flash.error="Cannot update topic name"
-
+        String message=topicService.update(topicId,params.topicName)
+        flash.message=message
         redirect(controller: "topic", action: 'show')
-
-    }
+     }
 
 
 

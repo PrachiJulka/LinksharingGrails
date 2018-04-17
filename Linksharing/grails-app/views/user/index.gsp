@@ -60,7 +60,7 @@
 
 
 
-                    <g:each in ="${user?.resources}" var="resources">
+                    <g:each in ="${resources}" var="resources">
                         <div class="row">
                         <div class="col-lg-offset-1 col-lg-2">
                       <ls:userImage id="${resources?.user?.id}"></ls:userImage>
@@ -119,17 +119,12 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <g:each in="${user?.subscribedTopic}" var="subscribedTopics">
+                            <g:each in="${subscriptionsList}" var="subscribedTopics">
 
 
                                 <div class="row">
-
-
-                                %{--    <% out.println "${session.user?.subscribedTopic?.topics?.name}"%>
-                                --}%
-
-                                  <div class="col-lg-offset-1 col-lg-2">
-                              <ls:userImage id="${subscribedTopics.id}"></ls:userImage>
+                 <div class="col-lg-offset-1 col-lg-2">
+                              <ls:userImage id="${subscribedTopics?.id}"></ls:userImage>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="row">
@@ -148,7 +143,7 @@
                                     <div class="row">
                                         <div class="col-sm-4"><ls:showSubscribe topicId="${subscribedTopics?.topic?.id}"></ls:showSubscribe></div>
 
-                                        <div class="col-sm-4"><a><ls:subscriptionCount user="${session.user}"></ls:subscriptionCount></a></div>
+                                        <div class="col-sm-4"><a><ls:subscriptionCount user="${user}"></ls:subscriptionCount></a></div>
                                         <div class="col-sm-4"><a>30</a></div>
                                     </div>
                                     <div class="row">

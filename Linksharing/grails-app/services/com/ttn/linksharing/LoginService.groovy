@@ -9,16 +9,17 @@ class LoginService {
     def register(UserCO userCO,def file){
 
         User user=new User()
-        user.setEmail(userCO.email)
-        user.setFirstName(userCO.firstName)
-        user.setLastName(userCO.lastName)
-        user.setUserName(userCO.userName)
-        user.setAdmin(false)
-        user.setActive(true)
-        user.setPassword(userCO.password)
-        user.setConfirmPassword(userCO.confirmPassword)
-        user.photo=file.bytes
-
+        user.identity {
+            setEmail(userCO.email)
+            setFirstName(userCO.firstName)
+            setLastName(userCO.lastName)
+            setUserName(userCO.userName)
+            setAdmin(false)
+            setActive(true)
+            setPassword(userCO.password)
+            setConfirmPassword(userCO.confirmPassword)
+            photo=file.bytes
+        }
         String message = "User Creation Failed"
         if(user.validate()) {
             user.save()
@@ -27,4 +28,34 @@ class LoginService {
 
         return message
      }
+
+    def login(String emailOrUserName,String password){
+        User user = User.findByUserNameAndPassword(emailOrUserName, password)
+        Map data = [:]
+
+        if(user==null){
+            user=User.findByEmailAndPassword(emailOrUserName,password)
+        }
+
+        if(user!=null) {
+
+            if(user.active) {
+
+               data.put("sucess",true)
+                data.put("message",user)
+
+            }
+            else {
+               data.put("sucess",false)
+               data.put("errorMessage","Your account is not active")
+
+            }
+        }
+        else
+        {
+            data.put("sucess",false)
+            data.put("errorMessage","Wrong Username or password")
+        }
+        return data
+    }
 }

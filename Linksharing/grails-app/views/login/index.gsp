@@ -64,7 +64,6 @@ Login should work from login form on home page and show top posts and recent pos
                                             </div>
                                             <div class="col-sm-offset-2 col-sm-4">
                                                 <a href='/resource/show?resourceId=${recentShares?.id}' class="anchor">View Post</a>
-                                             %{--   <g:link controller="resource" action="show" params="[resourceId:recentShares?.id]">View Post</g:link>--}%
 
                                             </div>
                                         </div>

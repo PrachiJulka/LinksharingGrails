@@ -38,4 +38,30 @@ class ResourceService {
         }
         return data
     }
+
+    String delete(Long resourceId){
+        Resource resource=Resource.load(resourceId)
+        String message="Resource not found"
+        if(resource)
+        {
+            resource.delete(flush:true)
+            message="Resource Deleted Successfully"
+
+        }
+        message
+    }
+
+    String updateDescription(Long resourceId,String description){
+        String message="Cannot update Resource description"
+        Resource resource=Resource.get(resourceId)
+        if(resource) {
+
+            resource.description = description
+            message="Resource description updated successfully"
+        }
+
+        return message
+
+
+    }
 }

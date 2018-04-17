@@ -2,50 +2,28 @@ package com.ttn.linksharing
 
 import com.ttn.linksharing.co.UserCO
 
-/*_create.gsp templates for resource/show topic/show user/login user/register*/
-
 class LoginController {
 
     UserService userService
-  LoginService loginService
+    LoginService loginService
 
     def index() {
 
-
-
-
-      }
+     }
 
     def logout() {
         session.invalidate()
-        redirect(action:'/login/index')
+        redirect(controller: 'login',action: 'index')
     }
 
     def loginHandler(String emailOrUserName, String password) {
 
-        User user = User.findByUserNameAndPassword(emailOrUserName, password)
-        if(user==null){
-            user=User.findByEmailAndPassword(emailOrUserName,password)
-        }
-
-        if(user!=null) {
-
-            if(user.active) {
-             session.user=user
-
-                forward(controller: 'user', action: 'index')
-
-            }
-            else {
-               flash.error = "Your account is not active"
-
-            }
+        Map data = loginService.login(emailOrUserName,password)
+        if(data.get("sucess")) {
+            session.user=data.get("message")
+            redirect(controller: "user", action: "index")
         }
         else
-        {
-            flash.error="User not found!! Please enter correct email or Username to login "
-        }
-
         redirect(action: 'index')
     }
 
@@ -53,7 +31,9 @@ class LoginController {
         def file=params.image
         String message=loginService.register(userCO,file)
         flash.message=message
-        redirect(controller:'login',action: 'index')
+
+      loginHandler(userCO.email,userCO.password)
+
      }
 
 

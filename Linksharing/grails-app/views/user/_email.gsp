@@ -4,7 +4,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Send Invitation (Pop up)</h4>
+            <h4 class="modal-title">Send Invitation</h4>
         </div>
 
         <div class="modal-body">
@@ -21,7 +21,7 @@
                     <div class="col-sm-4">
                         <select name='topicId' id="inviteEmails">
 
-                            <g:each in="${session.user?.subscribedTopic}" var="subscribedTopics">
+                            <g:each in="${subscriptionsList}" var="subscribedTopics">
 
                                 <option value="${subscribedTopics?.topic?.id}">${subscribedTopics?.topic?.name}</option>
                             </g:each>

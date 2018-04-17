@@ -9,15 +9,11 @@ class ResourceController {
     def index() { }
 
 
-    def delete(Integer id){
+    def delete(Long resourceId){
 
-        Resource resource=Resource.load(id)
-        if(resource)
-        {
-            resource.delete(flush:true)
-            flash.message="Resource Deleted Successfully"
-            redirect(controller:'user',action:'index')
-        }
+        String message=resourceService.delete(resourceId)
+        flash.message=message
+        redirect(controller:'user',action:'index')
     }
     def handleObjectNotFoundException() {
 
@@ -51,11 +47,8 @@ class ResourceController {
 
     def updateDescription(){
         Long resourceId=Long.parseLong(params.resourceId)
-        Long result =Resource.executeUpdate("update Resource set description=:description where id=:resourceId",[description:params.description,resourceId:resourceId])
-        if(result)
-            flash.message="Resource description updated successfully"
-        else
-            flash.error="Cannot update Resource description"
+        String message=resourceService.updateDescription(resourceId,params.description)
+        flash.message=message
 
         redirect(controller: "topic", action: 'show')
 

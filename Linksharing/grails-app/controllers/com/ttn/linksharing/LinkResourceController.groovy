@@ -20,7 +20,7 @@ class LinkResourceController extends ResourceController implements grails.async.
             ctx.start {
                 addToReadingItems(resource,session.user.id)
                 ctx.complete()
-//                ctx.dispatch()
+
             }
 
             flash.message="Saved Successfully"

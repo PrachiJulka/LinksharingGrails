@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Share Document (Pop up)</h4>
+                <h4 class="modal-title">Share Document</h4>
             </div>
 
             <div class="modal-body">
@@ -31,7 +31,7 @@
 
                         <div class="col-sm-10">
 
-                             <g:select class="form-control create-topic-modal-dropdown "  name="topicId" from="${session.user?.subscribedTopic?.topic}"
+                             <g:select class="form-control create-topic-modal-dropdown "  name="topicId" from="${subscriptionsList?.topic}"
 
                                                                 optionKey="id"/>
 

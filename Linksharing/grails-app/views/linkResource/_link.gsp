@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Share Link (Pop up)</h4>
+                <h4 class="modal-title">Share Link</h4>
             </div>
 
             <div class="modal-body">
@@ -30,13 +30,10 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">Topics</label>
                         <div class="col-sm-4">
-                             %{--   <g:each in="${session.user?.subscribedTopic}" var="subscribedTopics">
 
-                                    <option value="${subscribedTopics?.topic?.name}">${subscribedTopics?.topic?.name}</option>
-                                </g:each>--}%
                             <g:select
                                     class="form-control create-topic-modal-dropdown "
-                                    name="topicId" from="${session.user?.subscribedTopic?.topic}"
+                                    name="topicId" from="${subscriptionsList?.topic}"
 
                                     optionKey="id"/>
 
