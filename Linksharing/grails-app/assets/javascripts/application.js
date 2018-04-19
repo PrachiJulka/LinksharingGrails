@@ -88,4 +88,36 @@ $(document).ready(function(){
 
     });
 
+    $("#saveDocument").click(function(e){
+        var formData = new FormData();
+        formData.append("file",$("#document")[0].files[0])
+        formData.append("description",$("#description").val());
+        formData.append("topicDocument",$("#topicId").val());
+
+        $.ajax({
+            type: "POST",
+            url: "/document",
+            data: formData,
+            contentType: false,
+            processData: false,
+
+            success: function (response) {
+                // we have the response
+                alert('Document Shared Successfully');
+                $('#shareDocument').modal('hide');
+            },
+            error: function (e) {
+                alert("Error");
+                $('#shareDocument').modal('hide');
+            }
+        });
+
+    });
+
+    /*
+    var formData = new FormData();
+    formData.append("file",$("#document")[0].files[0])
+    formData.append("description",$("#description").val());
+    formData.append("topicDocument",$("#topicDocument").val());*/
+
 });

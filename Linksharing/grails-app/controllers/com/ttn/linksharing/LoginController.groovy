@@ -8,7 +8,7 @@ class LoginController {
     LoginService loginService
 
     def index() {
-
+        [recentShares:Resource.recentShares()]
      }
 
     def logout() {

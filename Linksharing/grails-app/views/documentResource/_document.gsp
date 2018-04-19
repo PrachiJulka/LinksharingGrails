@@ -31,7 +31,7 @@
 
                         <div class="col-sm-10">
 
-                             <g:select class="form-control create-topic-modal-dropdown "  name="topicId" from="${subscriptionsList?.topic}"
+                             <g:select class="form-control create-topic-modal-dropdown" id="topicId"  name="topicId" from="${subscriptionsList?.topic}"
 
                                                                 optionKey="id"/>
 
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <input type="submit" value="save" class="btn btn-primary"/>
+                            <input type="submit" value="save" id="saveDocument" class="btn btn-primary"/>
 
                             <input type="button" name="Cancel" id="cancel1" value="Cancel" data-dismiss="modal" class="btn btn-primary"/>
                         </div>
